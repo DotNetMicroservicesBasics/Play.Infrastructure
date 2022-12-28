@@ -26,3 +26,9 @@ az cosmosdb create --name $dbname --resource-group $appname --kind MongoDB --ena
 $sbname="playeconomyservicebusnamespace"
 az servicebus namespace create --name $sbname --resource-group $appname --sku Standard
 ```
+
+## Ceating the Azure Container Registry
+```poweshell
+$acrname="playeconomyazurecontainerregistry"
+az acr create --name $acrname --resource-group $appname --sku Basic
+```
