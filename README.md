@@ -32,3 +32,24 @@ az servicebus namespace create --name $sbname --resource-group $appname --sku St
 $acrname="playeconomyazurecontainerregistry"
 az acr create --name $acrname --resource-group $appname --sku Basic
 ```
+
+## Creating the Azure Kubernetes Service (AKS) cluster
+```powershell
+az extension add --name aks-preview
+az feature register --name "EnableWorkloadIdentityPreview" --namespace "Microsoft.ContainerService"
+
+# Wait for this command to reach "Registered" state
+az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/EnableWorkloadIdentityPreview')].{Name: name, State: properties.state}"
+
+
+az provider register --namespace Microsoft.ContainerService
+
+$aksname="playeconomyakscluster"
+az aks create -n $aksname -g $appname --node-vm-size Standard_B2s --node-count 2 --attach-acr $acrname --enable-oidc-issuer --enable-workload-identity --generate-ssh-keys
+
+az aks get-credentials --name $aksname --resource-group $appname
+
+# Test Creation & Connection Success
+kubectl version
+kubectl cluster-info
+```
