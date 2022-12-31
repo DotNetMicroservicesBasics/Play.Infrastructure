@@ -58,4 +58,7 @@ kubectl cluster-info
 ```powershell
 $kvname="playeconomyazurekeyvault"
 az keyvault create -n $kvname -g $appname
+
+# add a secret to your newly created key vault
+az keyvault secret set --vault-name $kvname --name "[KEY HERE]" --value "[VALUE HERE]"
 ```
