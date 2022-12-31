@@ -53,3 +53,9 @@ az aks get-credentials --name $aksname --resource-group $appname
 kubectl version
 kubectl cluster-info
 ```
+
+## Creating the Azure Key Vault
+```powershell
+$kvname="playeconomyazurekeyvault"
+az keyvault create -n $kvname -g $appname
+```
