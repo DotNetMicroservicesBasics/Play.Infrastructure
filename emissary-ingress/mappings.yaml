@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  playidentity-mapping
+spec:
+  hostname: playeconomygateway.eastus.cloudapp.azure.com
+  prefix: /identity-svc/
+  service: playidentity-service.playidentity

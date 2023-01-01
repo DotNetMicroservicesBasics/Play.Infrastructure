@@ -82,3 +82,10 @@ kubectl rollout status deployment/emissary-ingress -n $emnamespace -w
 kubectl get pods -n emissary
 kubectl get service emissary-ingress -n $emnamespace
 ```
+
+## Configuring Emissary-ingress routing
+```powershell
+kubectl apply -f .\emissary-ingress\listener.yaml -n $emnamespace
+
+kubectl apply -f .\emissary-ingress\mappings.yaml -n $emnamespace
+```
