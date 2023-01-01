@@ -97,3 +97,26 @@ helm repo update
 
 helm install cert-manager jetstack/cert-manager --version v1.10.1 --set installCRDs=true --namespace $emnamespace
 ```
+
+## Create the cluster issuer
+```powershell
+kubectl apply -f .\cert-manager\cluster-issuer.yaml -n $emnamespace
+
+# Check status
+kubectl get clusterissuer -n $emnamespace
+
+kubectl apply -f .\cert-manager\acme-challenge.yaml -n $emnamespace
+```
+
+## Create the tls certificate
+```powershell
+kubectl apply -f .\emissary-ingress\tls-certificate.yaml -n $emnamespace
+
+kubectl get certificate -n $emnamespace
+
+kubectl describe certificate -n $emnamespace
+
+kubectl get secret -n $emnamespace
+
+kubectl get secret playeconomy-tls -n $emnamespace -o yaml
+```
