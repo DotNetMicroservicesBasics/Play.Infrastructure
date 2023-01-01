@@ -79,7 +79,7 @@ helm install emissary-ingress datawire/emissary-ingress --set service.annotation
 kubectl rollout status deployment/emissary-ingress -n $emnamespace -w
 
 #Check pods & service
-kubectl get pods -n emissary
+kubectl get pods -n $emnamespace
 kubectl get service emissary-ingress -n $emnamespace
 ```
 
@@ -88,4 +88,12 @@ kubectl get service emissary-ingress -n $emnamespace
 kubectl apply -f .\emissary-ingress\listener.yaml -n $emnamespace
 
 kubectl apply -f .\emissary-ingress\mappings.yaml -n $emnamespace
+```
+
+## Installing cert-manager
+```powershell
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+
+helm install cert-manager jetstack/cert-manager --version v1.10.1 --set installCRDs=true --namespace $emnamespace
 ```
