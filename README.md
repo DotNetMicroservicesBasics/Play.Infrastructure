@@ -62,3 +62,23 @@ az keyvault create -n $kvname -g $appname
 # add a secret to your newly created key vault
 az keyvault secret set --vault-name $kvname --name "[KEY HERE]" --value "[VALUE HERE]"
 ```
+
+## Installing Emissary-ingress
+```powershell
+helm repo add datawire https://app.getambassador.io
+helm repo update
+
+
+kubectl apply -f https://app.getambassador.io/yaml/emissary/3.3.1/emissary-crds.yaml
+kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
+
+$emnamespace="emissary"
+kubectl create namespace $emnamespace
+$dnsname="playeconomygateway"
+helm install emissary-ingress datawire/emissary-ingress --set service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"=$dnsname --namespace $emnamespace  
+kubectl rollout status deployment/emissary-ingress -n $emnamespace -w
+
+#Check pods & service
+kubectl get pods -n emissary
+kubectl get service emissary-ingress -n $emnamespace
+```
