@@ -6,3 +6,12 @@ spec:
   hostname: playeconomygateway.eastus.cloudapp.azure.com
   prefix: /identity-svc/
   service: playidentity-service.playidentity
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  playcatalog-mapping
+spec:
+  hostname: playeconomygateway.eastus.cloudapp.azure.com
+  prefix: /playcatalog-svc/
+  service: playcatalog-service.playcatalog
