@@ -1,4 +1,3 @@
----
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
@@ -6,6 +5,18 @@ metadata:
 spec:
   port: 8080                     # int32, port number on which to listen
   protocol: HTTP                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
+  securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE  
+  hostBinding:
+    namespace:
+      from: SELF                 # SELF, ALL    
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: https-listener
+spec:
+  port: 8443                     # int32, port number on which to listen
+  protocol: HTTPS                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
   securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE  
   hostBinding:
     namespace:
