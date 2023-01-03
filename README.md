@@ -135,5 +135,5 @@ $helmPassword=az acr login --name $acrname --expose-token --query accessToken -o
 
 helm registry login "$acrname.azurecr.io" --username $helmUser --password $helmPassword
 
-helm push micrroservice-0.1.1.tgz oci://$acrname.azurecr.io/helm
+helm push microservice-0.1.0.tgz oci://$acrname.azurecr.io/helm
 ```
