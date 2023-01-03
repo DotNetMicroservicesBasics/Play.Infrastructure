@@ -15,3 +15,32 @@ spec:
   hostname: playeconomygateway.eastus.cloudapp.azure.com
   prefix: /playcatalog-svc/
   service: playcatalog-service.playcatalog
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  playinventory-mapping
+spec:
+  hostname: playeconomygateway.eastus.cloudapp.azure.com
+  prefix: /playinventory-svc/
+  service: playinventory-service.playinventory
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  playtrading-mapping
+spec:
+  hostname: playeconomygateway.eastus.cloudapp.azure.com
+  prefix: /playtrading-svc/
+  service: playtrading-service.playtrading
+  allow_upgrade:
+    - websocket
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  frontend-mapping
+spec:
+  hostname: playeconomygateway.eastus.cloudapp.azure.com
+  prefix: /
+  service: frontend-client.frontend

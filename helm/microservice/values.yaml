@@ -1,0 +1,18 @@
+envVariables:
+  ServiceSettings__MessageBroker: AZURESERVICEBUS
+  ServiceSettings__KeyVaultName: playeconomyazurekeyvault
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "250m"
+container:  
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 10
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 10 
+
+service:
+  type: ClusterIP
+  port: 80
