@@ -4,7 +4,7 @@ envVariables:
 resources:
   limits:
     memory: "128Mi"
-    cpu: "250m"
+    cpu: "150m"
 container:  
   liveness:
     path: /health/live
