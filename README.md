@@ -125,3 +125,15 @@ kubectl get secret playeconomy-tls -n $emnamespace -o yaml
 ```powershell
 kubectl apply -f .\emissary-ingress\host.yaml -n $emnamespace
 ```
+
+## Package & Publich the microservice Helm Chart
+```powershell
+helm package .\helm\microservice
+
+$helmUser=[guid]::Empty.Guid
+$helmPassword=az acr login --name $acrname --expose-token --query accessToken -o tsv
+
+helm registry login "$acrname.azurecr.io" --username $helmUser --password $helmPassword
+
+helm push micrroservice-0.1.0.tgz oci://$acrname.azurecr.io/helm
+```
