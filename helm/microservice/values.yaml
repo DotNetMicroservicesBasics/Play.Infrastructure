@@ -1,6 +1,8 @@
 envVariables:
   ServiceSettings__MessageBroker: AZURESERVICEBUS
   ServiceSettings__KeyVaultName: playeconomyazurekeyvault
+  SeqSettings__Host: seq.observability
+  SeqSettings__Port: 5341
 resources:
   limits:
     memory: "128Mi"

@@ -135,7 +135,7 @@ $helmPassword=az acr login --name $acrname --expose-token --query accessToken -o
 
 helm registry login "$acrname.azurecr.io" --username $helmUser --password $helmPassword
 
-helm push microservice-0.1.0.tgz oci://$acrname.azurecr.io/helm
+helm push microservice-0.1.1.tgz oci://$acrname.azurecr.io/helm
 ```
 
 ## Create Github service principal
@@ -145,4 +145,12 @@ $appID= az ad sp create-for-rbac -n "Github" --query appId -o tsv
 az role assignment create --assignee $appID --role "AcrPush" --resource-group $appname
 az role assignment create --assignee $appID --role "Azure Kubernetes Service Cluster User Role" --resource-group $appname
 az role assignment create --assignee $appID --role "Azure Kubernetes Service Contributor Role" --resource-group $appname
+```
+
+## Deploy Seq to AKS
+```powershell
+helm repo add datalust https://helm.datalust.co
+helm repo update
+
+helm install seq datalust/seq -n observability --create-namespace
 ```
