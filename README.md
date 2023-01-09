@@ -149,8 +149,17 @@ az role assignment create --assignee $appID --role "Azure Kubernetes Service Con
 
 ## Deploy Seq to AKS
 ```powershell
+$obsvnamesapce="observability"
 helm repo add datalust https://helm.datalust.co
 helm repo update
 
-helm install seq datalust/seq -n observability --create-namespace
+helm install seq datalust/seq -n $obsvnamesapce --create-namespace
+```
+
+## Deploy Jaeger to AKS
+```powershell
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+helm repo update
+
+helm upgrade jaeger jaegertracing/jaeger --values .\jaeger\values.yaml -n $obsvnamesapce --install 
 ```
