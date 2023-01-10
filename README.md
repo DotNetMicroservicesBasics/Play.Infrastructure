@@ -158,8 +158,19 @@ helm install seq datalust/seq -n $obsvnamesapce --create-namespace
 
 ## Deploy Jaeger to AKS
 ```powershell
+
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm repo update
 
 helm upgrade jaeger jaegertracing/jaeger --values .\jaeger\values.yaml -n $obsvnamesapce --install 
+```
+
+## Deploy Prometheus & Grafana
+```powershell
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+helm upgrade prometheus prometheus-community/kube-prometheus-stack --values .\prometheus\values.yaml -n $obsvnamesapce --install 
+
 ```
